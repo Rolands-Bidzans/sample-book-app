@@ -19,7 +19,7 @@ pipeline {
         }
         stage('test-dev') {
             steps {
-                run-api-tests("DEV");
+                run-api-tests("DEV")
             }
         }
         stage('deploy-stg') {
@@ -29,7 +29,7 @@ pipeline {
         }
         stage('test-stg') {
             steps {
-                run-api-tests("STG");
+                run-api-tests("STG")
             }
         }
         stage('deploy-prd') {
@@ -39,7 +39,7 @@ pipeline {
         }
         stage('test-prd') {
             steps {
-                run-api-tests("PRD");
+                run-api-tests("PRD")
             }
         }
     }

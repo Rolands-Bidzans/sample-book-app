@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build-docker-image') {
             steps {
-                echo "Building docker image"
+                build()
             }
         }
         stage('deploy-dev') {
@@ -44,6 +44,11 @@ pipeline {
         }
     }
 }
+
+def build(){
+    echo "Building docker image"
+} 
+
 
 def deploy(String environment) {
     echo "Deployement treiggered on ${environment} env.."

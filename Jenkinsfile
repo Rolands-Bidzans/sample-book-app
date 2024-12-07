@@ -14,23 +14,41 @@ pipeline {
         }
         stage('deploy-dev') {
             steps {
-                echo "Deployement treiggered on DEV env.."
+                deploy("DEV")
             }
         }
         stage('test-dev') {
             steps {
-                echo "API tests triggered on DEV env.."
+                un-api-tests("DEV");
+            }
+        }
+        stage('deploy-stg') {
+            steps {
+                deploy("STG")
+            }
+        }
+        stage('test-stg') {
+            steps {
+                un-api-tests("STG");
             }
         }
         stage('deploy-prd') {
             steps {
-                echo "Deployement treiggered on PRD env.."
+                deploy("PRD")
             }
         }
         stage('test-prd') {
             steps {
-                echo "API tests treiggered on PRD env.."
+                run-api-tests("PRD");
             }
         }
     }
+}
+
+def deploy(String environment) {
+    echo "Deployement treiggered on ${environment} env.."
+}
+
+def run-api-tests(String environment) {
+    echo "API tests treiggered on ${environment} env.."
 }

@@ -1,10 +1,7 @@
 pipeline {
     agent any
-    // triggers {
-    //     pollSCM('*/1 * * * *')
-    // }
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('rolandstech-dockerhub')
+        DOCKERHUB_CREDENTIALS = credentials('rolandstech-dockerhub') // This fetches the credentials from Jenkins credentials store
     }
     parameters {
         string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
@@ -12,7 +9,9 @@ pipeline {
     stages {
         stage('Build-docker-image') {
             steps {
-                buildDockerImage()
+                script {
+                    buildDockerImage()
+                }
             }
         }
         stage('deploy-dev') {
@@ -22,7 +21,7 @@ pipeline {
         }
         stage('test-dev') {
             steps {
-               runApiTests("DEV")
+                runApiTests("DEV")
             }
         }
         stage('deploy-stg') {
@@ -48,16 +47,18 @@ pipeline {
     }
 }
 
-def buildDockerImage(){
+def buildDockerImage() {
     echo "Docker version..."
-    echo "Using credentials for DockerHub: ${DOCKERHUB_CREDENTIALS_USR}"
-
-    // Docker login
-    powershell """
-        docker --version
+    
+    // Securely pass the Docker credentials into the Docker login command using 'withCredentials'
+    withCredentials([usernamePassword(credentialsId: 'rolandstech-dockerhub', usernameVariable: 'DOCKERHUB_USR', passwordVariable: 'DOCKERHUB_PSW')]) {
         echo "Logging in to DockerHub..."
-        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-    """
+        // Docker login using the provided credentials
+        powershell """
+            docker --version
+            echo $DOCKERHUB_PSW | docker login -u $DOCKERHUB_USR --password-stdin
+        """
+    }
     
     // Build Docker image
     echo "Building docker image..."
@@ -66,17 +67,17 @@ def buildDockerImage(){
     // Push the image to DockerHub
     echo "Pushing image to DockerHub..."
     powershell "docker push rolandstech/sample-book-app"
-} 
-
+}
 
 def deploy(String environment) {
-    echo "Deployement treiggered on ${environment} env.."
-    String lowercaseEnv = environment.toLowerCase();
+    echo "Deployment triggered on ${environment} environment..."
+    String lowercaseEnv = environment.toLowerCase()
     powershell "docker compose stop sample-book-app-${lowercaseEnv}"
     powershell "docker compose rm sample-book-app-${lowercaseEnv}"
     powershell "docker compose up -d sample-book-app-${lowercaseEnv}"
 }
 
 def runApiTests(String environment) {
-    echo "API tests treiggered on ${environment} env..."
+    echo "Running API tests in the ${environment} environment..."
+    // Add your API test logic here
 }

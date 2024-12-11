@@ -3,6 +3,9 @@ pipeline {
     // triggers {
     //     pollSCM('*/1 * * * *')
     // }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('rolandstech-dockerhub')
+    }
     parameters {
         string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
     }
@@ -48,6 +51,9 @@ pipeline {
 def buildDockerImage(){
     echo "Building docker image..."
     sh "docker build -t rolandstech/sample-book-app ."
+
+    echo "Login to Docker hub"
+    sh "echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKERHUB_CREDENTIALS "
     
     echo "Pushing image to docker registry.."
     sh "docker push rolandstech/sample-book-app"

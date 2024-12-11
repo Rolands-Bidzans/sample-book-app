@@ -50,16 +50,22 @@ pipeline {
 
 def buildDockerImage(){
     echo "Docker version..."
-    echo "${$DOCKERHUB_CREDENTIALS_PSW}    and ${DOCKERHUB_CREDENTIALS_USR}"
-    sh "docker --version"
-    // echo "Building docker image..."
-    // sh "docker build -t rolandstech/sample-book-app ."
+    echo "Using credentials for DockerHub: ${DOCKERHUB_CREDENTIALS_USR}"
 
-    // echo "Login to Docker hub"
-    // sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin "
-
-    // echo "Pushing image to docker registry.."
-    // sh "docker push rolandstech/sample-book-app"
+    // Docker login
+    sh """
+        docker --version
+        echo "Logging in to DockerHub..."
+        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+    """
+    
+    // Build Docker image
+    echo "Building docker image..."
+    sh "docker build -t rolandstech/sample-book-app ."
+    
+    // Push the image to DockerHub
+    echo "Pushing image to DockerHub..."
+    sh "docker push rolandstech/sample-book-app"
 } 
 
 

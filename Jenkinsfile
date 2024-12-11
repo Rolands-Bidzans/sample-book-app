@@ -49,14 +49,17 @@ pipeline {
 }
 
 def buildDockerImage(){
-    echo "Building docker image..."
-    sh "docker build -t rolandstech/sample-book-app ."
+    echo "Docker version..."
+    echo "${$DOCKERHUB_CREDENTIALS_PSW}    and $DOCKERHUB_CREDENTIALS_USR"
+    docker --version
+    // echo "Building docker image..."
+    // sh "docker build -t rolandstech/sample-book-app ."
 
-    echo "Login to Docker hub"
-    sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin "
+    // echo "Login to Docker hub"
+    // sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin "
 
-    echo "Pushing image to docker registry.."
-    sh "docker push rolandstech/sample-book-app"
+    // echo "Pushing image to docker registry.."
+    // sh "docker push rolandstech/sample-book-app"
 } 
 
 

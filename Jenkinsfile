@@ -50,8 +50,8 @@ pipeline {
 
 def buildDockerImage(){
     echo "Docker version..."
-    echo "${$DOCKERHUB_CREDENTIALS_PSW}    and $DOCKERHUB_CREDENTIALS_USR"
-    docker --version
+    echo "${$DOCKERHUB_CREDENTIALS_PSW}    and ${DOCKERHUB_CREDENTIALS_USR}"
+    sh "docker --version"
     // echo "Building docker image..."
     // sh "docker build -t rolandstech/sample-book-app ."
 

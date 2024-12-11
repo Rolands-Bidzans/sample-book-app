@@ -53,7 +53,7 @@ def buildDockerImage(){
     echo "Using credentials for DockerHub: ${DOCKERHUB_CREDENTIALS_USR}"
 
     // Docker login
-    sh """
+    powershell """
         docker --version
         echo "Logging in to DockerHub..."
         echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
@@ -61,20 +61,20 @@ def buildDockerImage(){
     
     // Build Docker image
     echo "Building docker image..."
-    sh "docker build -t rolandstech/sample-book-app ."
+    powershell "docker build -t rolandstech/sample-book-app ."
     
     // Push the image to DockerHub
     echo "Pushing image to DockerHub..."
-    sh "docker push rolandstech/sample-book-app"
+    powershell "docker push rolandstech/sample-book-app"
 } 
 
 
 def deploy(String environment) {
     echo "Deployement treiggered on ${environment} env.."
     String lowercaseEnv = environment.toLowerCase();
-    sh "docker compose stop sample-book-app-${lowercaseEnv}"
-    sh "docker compose rm sample-book-app-${lowercaseEnv}"
-    sh "docker compose up -d sample-book-app-${lowercaseEnv}"
+    powershell "docker compose stop sample-book-app-${lowercaseEnv}"
+    powershell "docker compose rm sample-book-app-${lowercaseEnv}"
+    powershell "docker compose up -d sample-book-app-${lowercaseEnv}"
 }
 
 def runApiTests(String environment) {

@@ -53,7 +53,7 @@ def buildDockerImage() {
     // Securely pass the Docker credentials into the Docker login command using 'withCredentials'
     withCredentials([usernamePassword(credentialsId: 'rolandstech-dockerhub', usernameVariable: 'DOCKERHUB_USR', passwordVariable: 'DOCKERHUB_PSW')]) {
         echo "Logging in to DockerHub..."
-        sh "docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW"
+        powershell "docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW"
     }
     
     // Build Docker image

@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    triggers {
-        pollSCM('*/1 * * * *')
-    }
+    // triggers {
+    //     pollSCM('*/1 * * * *')
+    // }
     parameters {
         string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
     }
@@ -46,14 +46,22 @@ pipeline {
 }
 
 def buildDockerImage(){
-    echo "Building docker image"
+    echo "Building docker image..."
+    sh "docker build -t rolandstech/sample-book-app ."
+    
+    echo "Pushing image to docker registry.."
+    sh "docker push rolandstech/sample-book-app"
 } 
 
 
 def deploy(String environment) {
     echo "Deployement treiggered on ${environment} env.."
+    String lowercaseEnv = environment.toLowerCase();
+    sh "docker compose stop sample-book-app-${lowercaseEnv}"
+    sh "docker compose rm sample-book-app-${lowercaseEnv}"
+    sh "docker compose up -d sample-book-app-${lowercaseEnv}"
 }
 
 def runApiTests(String environment) {
-    echo "API tests treiggered on ${environment} env.."
+    echo "API tests treiggered on ${environment} env..."
 }

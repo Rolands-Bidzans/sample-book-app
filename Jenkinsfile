@@ -53,8 +53,8 @@ def buildDockerImage(){
     sh "docker build -t rolandstech/sample-book-app ."
 
     echo "Login to Docker hub"
-    sh "echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKERHUB_CREDENTIALS "
-    
+    sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin "
+
     echo "Pushing image to docker registry.."
     sh "docker push rolandstech/sample-book-app"
 } 

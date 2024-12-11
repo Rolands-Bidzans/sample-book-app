@@ -3,9 +3,9 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('rolandstech-dockerhub') // This fetches the credentials from Jenkins credentials store
     }
-    parameters {
-        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-    }
+    // parameters {
+    //     string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
+    // }
     stages {
         stage('Build-docker-image') {
             steps {
@@ -75,5 +75,6 @@ def deploy(String environment) {
 
 def runApiTests(String environment) {
     echo "Running API tests in the ${environment} environment..."
-    // Add your API test logic here
+    powershell "docker pull rolandstech/js-api-tests"
+    powershell "docker run --network=host --rm rolandstech/js-api-tests run BOOKS BOOKS_${environment}"
 }

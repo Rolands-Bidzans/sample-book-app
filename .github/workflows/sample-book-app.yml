@@ -37,6 +37,6 @@ jobs:
       - run: echo "Deployment triggered on PRD env..."
   test-prd:
     runs-on: ubuntu-latest
-    needs: [test-prd]
+    needs: [deploy-prd]
     steps:
       - run: echo "Tests triggered on PRD env..."

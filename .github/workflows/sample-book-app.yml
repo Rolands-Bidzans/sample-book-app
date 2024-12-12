@@ -12,25 +12,31 @@ jobs:
       - run: echo "Building docker image..."
   deploy-dev:
     runs-on: ubuntu-latest
+    needs: "build-docker-image"
     steps:
       - run: echo "Deployment triggered on DEV env..."
   test-dev:
     runs-on: ubuntu-latest
+    needs: "deploy-dev"
     steps:
       - run: echo "Tests triggered on DEV env..."
   deploy-stg:
     runs-on: ubuntu-latest
+    needs: "test-dev"
     steps:
       - run: echo "Deployment triggered on STG env..."
   test-stg:
     runs-on: ubuntu-latest
+    needs: "deploy-stg"
     steps:
       - run: echo "Tests triggered on STG env..."
   deploy-prd:
     runs-on: ubuntu-latest
+    needs: "test-stg"
     steps:
       - run: echo "Deployment triggered on PRD env..."
   test-prd:
     runs-on: ubuntu-latest
+    needs: "test-prd"
     steps:
       - run: echo "Tests triggered on PRD env..."

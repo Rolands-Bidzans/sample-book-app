@@ -1,0 +1,36 @@
+name: Sample Book App Workflow
+
+on: 
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building docker image..."
+  deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deployment triggered on DEV env..."
+  test-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Tests triggered on DEV env..."
+  deploy-stg:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deployment triggered on STG env..."
+  test-stg:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Tests triggered on STG env..."
+  deploy-prd:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deployment triggered on PRD env..."
+  test-prd:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Tests triggered on PRD env..."

@@ -1,0 +1,9 @@
+﻿{
+  "agentId": 2,
+  "agentName": "windows-runner",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus25.actions.githubusercontent.com/eqt4JbSN1ypyQd7RStMTBhIobpzkTlPPhyglqZx6piVosY7ukn/",
+  "gitHubUrl": "https://github.com/Rolands-Bidzans/sample-book-app",
+  "workFolder": "_work"
+}

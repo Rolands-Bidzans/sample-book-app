@@ -7,36 +7,36 @@ on:
 
 jobs:
   build-docker-image:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - run: echo "Building docker image..."
   deploy-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [build-docker-image]
     steps:
       - run: echo "Deployment triggered on DEV env..."
   test-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-dev]
     steps:
       - run: echo "Tests triggered on DEV env..."
   deploy-stg:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [test-dev]
     steps:
       - run: echo "Deployment triggered on STG env..."
   test-stg:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-stg]
     steps:
       - run: echo "Tests triggered on STG env..."
   deploy-prd:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [test-stg]
     steps:
       - run: echo "Deployment triggered on PRD env..."
   test-prd:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-prd]
     steps:
       - run: echo "Tests triggered on PRD env..."

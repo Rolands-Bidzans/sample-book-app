@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "Rolands-Bidzans/sample-book-app",
+  "pipelineDirectory": "sample-book-app",
+  "workspaceDirectory": "sample-book-app\\sample-book-app",
+  "repositories": {
+    "Rolands-Bidzans/sample-book-app": {
+      "repositoryPath": "sample-book-app\\sample-book-app",
+      "lastRunOn": "12/12/2024 13:48:55 +02:00"
+    }
+  },
+  "lastRunOn": "12/12/2024 13:49:52 +02:00"
+}

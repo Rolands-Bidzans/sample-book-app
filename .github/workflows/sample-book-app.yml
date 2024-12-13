@@ -1,7 +1,4 @@
 name: Sample Book App Workflow
-  run: echo "Building docker image..."
-  shell: pwsh -command "Set-ExecutionPolicy Bypass -Scope Process; . '{0}'"
-
 
 on: 
   push:

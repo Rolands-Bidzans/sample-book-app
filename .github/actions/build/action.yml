@@ -5,7 +5,7 @@ runs:
   steps:
     - name: Building docker image...
       run: docker build -t rolandstech/sample-book-app .
-      shell: pwsh # powershell
+      shell: bash # powershell
     - name: Pushing image to DockerHub...
       run: docker push rolandstech/sample-book-app
-      shell: pwsh  # powershell
+      shell: bash  # powershell

@@ -1,0 +1,11 @@
+name: 'Building docker image and pushing it to docker hub'
+description: 'Building docker image and pushing it to docker hub'
+runs:
+  using: composite
+  steps:
+    - name: Building docker image...
+      run: docker build -t rolandstech/sample-book-app .
+      shell: powershell
+    - name: Pushing image to DockerHub...
+      run: docker push rolandstech/sample-book-app
+      shell: powershell

@@ -9,8 +9,7 @@ jobs:
   build-docker-image:
     runs-on: self-hosted
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/build
   deploy-dev:
     runs-on: self-hosted

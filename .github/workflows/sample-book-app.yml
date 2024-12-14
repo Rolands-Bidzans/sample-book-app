@@ -10,9 +10,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: echo "Building docker image..."
-      - run: powershell "docker build -t rolandstech/sample-book-app ."
+        run: powershell "docker build -t rolandstech/sample-book-app ."
       - name: powershell "docker push rolandstech/sample-book-app"
-      - run: powershell "docker push rolandstech/sample-book-app"
+        run: powershell "docker push rolandstech/sample-book-app"
   deploy-dev:
     runs-on: self-hosted
     needs: [build-docker-image]

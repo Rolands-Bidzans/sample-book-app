@@ -9,6 +9,8 @@ jobs:
   build-docker-image:
     runs-on: self-hosted
     steps:
+      - name: Checkout the code
+      - uses: actions/checkout@v4
       - name: Building docker image...
         run: docker build -t rolandstech/sample-book-app .
       - name: Pushing image to DockerHub...

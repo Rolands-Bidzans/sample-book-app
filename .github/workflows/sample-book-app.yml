@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
-      - uses: ./gihub/actions/build
+      - uses: ./github/actions/build
   deploy-dev:
     runs-on: self-hosted
     needs: [build-docker-image]

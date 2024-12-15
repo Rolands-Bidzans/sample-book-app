@@ -2,7 +2,7 @@ services:
   sample-book-app-dev:
     build: .
     image: rolandstech/sample-book-app
-    container_name: sample-book-app-local
+    container_name: sample-book-app-dev
     ports:
       - 1010:1050
   sample-book-app-stg:

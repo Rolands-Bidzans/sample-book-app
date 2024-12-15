@@ -9,8 +9,8 @@ jobs:
   build-docker-image:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
-      # - uses: ./.github/actions/build
+      # - uses: actions/checkout@v4
+      - uses: ./.github/actions/build
   deploy-dev:
     runs-on: self-hosted
     needs: [build-docker-image]

@@ -7,37 +7,37 @@ on:
 
 jobs:
   build-docker-image:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #self-hosted
     steps:
       # - uses: actions/checkout@v4
       - uses: ./.github/actions/build
   deploy-dev:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #self-hosted
     needs: [build-docker-image]
     steps:
       - run: echo "Deployment triggered on DEV env..."
   test-dev:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #self-hosted
     needs: [deploy-dev]
     steps:
       - run: echo "Tests triggered on DEV env..."
   deploy-stg:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #self-hosted
     needs: [test-dev]
     steps:
       - run: echo "Deployment triggered on STG env..."
   test-stg:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #self-hosted
     needs: [deploy-stg]
     steps:
       - run: echo "Tests triggered on STG env..."
   deploy-prd:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #self-hosted
     needs: [test-stg]
     steps:
       - run: echo "Deployment triggered on PRD env..."
   test-prd:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #self-hosted
     needs: [deploy-prd]
     steps:
       - run: echo "Tests triggered on PRD env..."

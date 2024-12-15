@@ -3,13 +3,9 @@ description: 'Building docker image and pushing it to docker hub'
 runs:
   using: composite
   steps:
-    - name: Logging in to DockerHub
-      run: |
-        echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-      shell: pwsh
     - name: Building docker image...
       run: docker build -t rolandstech/sample-book-app .
-      shell: pwsh # powershell
+      shell: sh
     - name: Pushing image to DockerHub...
       run: docker push rolandstech/sample-book-app
-      shell: pwsh  # powershell
+      shell: sh

@@ -9,7 +9,7 @@ jobs:
   build-docker-image:
     runs-on: ubuntu-latest #self-hosted
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # Used to access github files
       - name: Logging in to DockerHub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - uses: ./.github/actions/build
@@ -25,7 +25,9 @@ jobs:
     runs-on: ubuntu-latest #self-hosted
     needs: [deploy-dev]
     steps:
-      - run: echo "Tests triggered on DEV env..."
+      - uses: ./.github/actions/test
+        with:
+          environment: 'DEV'
   deploy-stg:
     runs-on: ubuntu-latest #self-hosted
     needs: [test-dev]
@@ -38,7 +40,9 @@ jobs:
     runs-on: ubuntu-latest #self-hosted
     needs: [deploy-stg]
     steps:
-      - run: echo "Tests triggered on STG env..."
+      - uses: ./.github/actions/test
+        with:
+          environment: 'STG'
   deploy-prd:
     runs-on: ubuntu-latest #self-hosted
     needs: [test-stg]
@@ -51,4 +55,6 @@ jobs:
     runs-on: ubuntu-latest #self-hosted
     needs: [deploy-prd]
     steps:
-      - run: echo "Tests triggered on PRD env..."
+      - uses: ./.github/actions/test
+        with:
+          environment: 'PRD'

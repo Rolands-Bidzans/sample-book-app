@@ -1,0 +1,22 @@
+name: 'Run API tests'
+description: 'Action to run API tests against our Sample Book App service'
+inputs:
+  environment:
+    description: 'Environment where to run Sample book App API tests again'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Pull the api test image from docker hub
+      run: docker pull rolandstech/js-api-tests
+      shell: sh
+    - name: Run API tests
+      run: docker run --network=host --rm rolandstech/js-api-tests run BOOKS BOOKS_${{ inputs.environment }}
+      shell: sh
+
+# Jenkinsfile
+# def runApiTests(String environment) {
+#     echo "Running API tests in the ${environment} environment..."
+#     powershell "docker pull rolandstech/js-api-tests"
+#     powershell "docker run --network=host --rm rolandstech/js-api-tests run BOOKS BOOKS_${environment}"
+# }

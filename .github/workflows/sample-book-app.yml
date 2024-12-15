@@ -6,6 +6,11 @@ on:
   workflow_dispatch:
 
 jobs:
+  dockerhub-login:
+    runs-on: ubuntu-latest #self-hosted
+    steps:
+      - name: Logging in to DockerHub
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
   build-docker-image:
     runs-on: ubuntu-latest #self-hosted
     steps:

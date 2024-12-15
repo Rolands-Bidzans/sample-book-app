@@ -1,0 +1,27 @@
+name: 'Deploy Application'
+description: 'Deploy Sample Book App service via docker compose'
+inputs:
+  evironment:
+    description: 'Environment where to deploy Sample Book App'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Stopping previous application container
+      run: docker compose stop sample-book-app-${{ inputs.evironment }}
+      shell: sh
+    - name: Remove previouse application container
+      run: docker compose rm sample-book-app-${{ inputs.evironment }}
+      shell: sh
+    - name: Run new application container
+      run: docker compose up -d sample-book-app-${{ inputs.evironment }}
+      shell: sh
+
+# Jenkinsfile
+# def deploy(String environment) {
+#     echo "Deployment triggered on ${environment} environment..."
+#     String lowercaseEnv = environment.toLowerCase()
+#     powershell "docker compose stop sample-book-app-${lowercaseEnv}"
+#     powershell "docker compose rm sample-book-app-${lowercaseEnv}"
+#     powershell "docker compose up -d sample-book-app-${lowercaseEnv}"
+# }

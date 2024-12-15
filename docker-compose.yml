@@ -2,7 +2,7 @@ services:
   sample-book-app-dev:
     build: .
     image: mtararujs/sample-book-app
-    container_name: sample-book-app-dev
+    container_name: sample-book-app-local
     ports:
       - 1010:1050
   sample-book-app-stg:

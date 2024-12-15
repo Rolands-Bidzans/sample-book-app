@@ -1,13 +1,13 @@
 services:
   sample-book-app-dev:
     build: .
-    image: mtararujs/sample-book-app
+    image: rolandstech/sample-book-app
     container_name: sample-book-app-local
     ports:
       - 1010:1050
   sample-book-app-stg:
     build: . 
-    image: mtararujs/sample-book-app
+    image: rolandstech/sample-book-app
     container_name: sample-book-app-stg
     ports:
       - 2020:1050
@@ -15,10 +15,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: mtararujs/sample-book-app
+    image: rolandstech/sample-book-app
     container_name: sample-book-app-prd
     ports:
       - 3030:1050
 
-# docker run --rm --name sample-book-app -p 1010:1050 mtararujs/sample-book-app
-# docker build -t mtararujs/sample-book-app .
+# docker run --rm --name sample-book-app -p 1010:1050 rolandstech/sample-book-app
+# docker build -t rolandstech/sample-book-app .

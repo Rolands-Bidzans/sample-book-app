@@ -29,7 +29,7 @@ jobs:
   deploy-stg:
     runs-on: ubuntu-latest #self-hosted
     needs: [test-dev]
-      steps:
+    steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/deploy
         with: 

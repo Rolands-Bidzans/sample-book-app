@@ -29,8 +29,11 @@ jobs:
   deploy-stg:
     runs-on: ubuntu-latest #self-hosted
     needs: [test-dev]
-    steps:
-      - run: echo "Deployment triggered on STG env..."
+      steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deploy
+        with: 
+          environment: 'stg'
   test-stg:
     runs-on: ubuntu-latest #self-hosted
     needs: [deploy-stg]
@@ -40,7 +43,10 @@ jobs:
     runs-on: ubuntu-latest #self-hosted
     needs: [test-stg]
     steps:
-      - run: echo "Deployment triggered on PRD env..."
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deploy
+        with: 
+          environment: 'prd'
   test-prd:
     runs-on: ubuntu-latest #self-hosted
     needs: [deploy-prd]

@@ -1,7 +1,7 @@
 name: 'Deploy Application'
 description: 'Deploy Sample Book App service via docker compose'
 inputs:
-  evironment:
+  environment:
     description: 'Environment where to deploy Sample Book App'
     required: true
 runs:

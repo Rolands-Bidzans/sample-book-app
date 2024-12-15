@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest #self-hosted
     needs: [deploy-dev]
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/test
         with:
           environment: 'DEV'

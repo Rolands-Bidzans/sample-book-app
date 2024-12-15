@@ -8,15 +8,17 @@ on:
 
 
 jobs:
-  dockerhub-login:
-    runs-on: ubuntu-latest #self-hosted
-    steps:
-      - name: Logging in to DockerHub
-        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+  # dockerhub-login:
+  #   runs-on: ubuntu-latest #self-hosted
+  #   steps:
+  #     - name: Logging in to DockerHub
+  #       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
   build-docker-image:
     runs-on: ubuntu-latest #self-hosted
     steps:
       - uses: actions/checkout@v4
+      - name: Logging in to DockerHub
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - uses: ./.github/actions/build
   deploy-dev:
     runs-on: ubuntu-latest #self-hosted

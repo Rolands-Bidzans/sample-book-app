@@ -8,13 +8,13 @@ runs:
   using: composite
   steps:
     - name: Stopping previous application container
-      run: docker compose stop sample-book-app-${{ inputs.evironment }}
+      run: docker compose stop sample-book-app-${{ inputs.environment }}
       shell: sh
     - name: Remove previouse application container
-      run: docker compose rm sample-book-app-${{ inputs.evironment }}
+      run: docker compose rm sample-book-app-${{ inputs.environment }}
       shell: sh
     - name: Run new application container
-      run: docker compose up -d sample-book-app-${{ inputs.evironment }}
+      run: docker compose up -d sample-book-app-${{ inputs.environment }}
       shell: sh
 
 # Jenkinsfile
